@@ -27,8 +27,12 @@ func processTarget(sourceFile, target, contentRoot string) string {
 		return strings.TrimSuffix(target, ".md")
 	}
 
-	sourceDir, _ := filepath.Split(sourceFile)
+	sourceDir, sourceFileName := filepath.Split(sourceFile)
 	sourceDir = strings.TrimPrefix(sourceDir, contentRoot)
+
+	if strings.HasPrefix(target, "#") {
+		target = strings.TrimPrefix(sourceDir+sourceFileName, "/") + target
+	}
 
 	// 0. split block reference
 	// TODO: implement block reference

@@ -37,15 +37,19 @@ func parse(sourceFile, contentRoot string) []Link {
 		target = processTarget(sourceFile, target, contentRoot)
 		source := processSource(trim(sourceFile, contentRoot, ".md"))
 
-		fmt.Printf("find target: %s, source: %s, text: %s\n", target, source, text)
+		if isInternal(target) {
+			fmt.Printf("find target: %s, source: %s, text: %s\n", target, source, text)
+		}
 
 		// fmt.Printf("  '%s' => %s\n", source, target)
-		links = append(links, Link{
-			Source: source,
-			Target: target,
-			Text:   text,
-		})
-		n++
+		if source != target {
+			links = append(links, Link{
+				Source: source,
+				Target: target,
+				Text:   text,
+			})
+			n++
+		}
 	})
 	fmt.Printf("[Parsing note] %s => find %d links \n", trim(sourceFile, contentRoot, ".md"), n)
 
