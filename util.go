@@ -83,6 +83,7 @@ func processTarget(sourceFile, target, contentRoot string) string {
 
 func processSource(source string) string {
 	res := filepath.ToSlash(hugoPathTrim(source))
+	res = strings.TrimSuffix(res, "/")
 	res = UnicodeSanitize(res)
 	return strings.ReplaceAll(url.PathEscape(res), "%2F", "/")
 }
