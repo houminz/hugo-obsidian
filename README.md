@@ -34,7 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build Link Index
-        uses: jackyzha0/hugo-obsidian@v2.1
+        uses: librabyte/hugo-obsidian@v0.0.1
         with:
           input: content # input folder
           output: data   # output folder
